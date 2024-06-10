@@ -88,7 +88,6 @@ class HeadPosition:
                 self.state_tracker["start_time"] = end_time
 
                 if self.state_tracker["DROWSY_TIME"] >= thresholds["WAIT_TIME"]:
-                    # text += ", don't see to screen!"
                     self.state_tracker["play_alarm"] = True
                 else:
                     self.state_tracker["play_alarm"] = False
