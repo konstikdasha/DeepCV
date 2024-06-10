@@ -3,7 +3,6 @@ import time
 import numpy as np
 import mediapipe as mp
 from mediapipe.python.solutions.drawing_utils import _normalized_to_pixel_coordinates as denormalize_coordinates
-# from .utils import plot_text
 
 
 def distance(point_1, point_2):
@@ -125,7 +124,6 @@ class BlinkingHandler:
         if facemesh_results.multi_face_landmarks:
             landmarks = facemesh_results.multi_face_landmarks[0].landmark
             EAR, coordinates = calculate_avg_ear(landmarks, self.eye_idxs["left"], self.eye_idxs["right"], frame_w, frame_h)
-            # info_frame = cv2.cvtColor(info_frame, cv2.COLOR_BGR2RGB).copy()
             info_frame = plot_eye_landmarks(info_frame, coordinates[0], coordinates[1], self.state_tracker["COLOR"])
 
 
@@ -143,7 +141,6 @@ class BlinkingHandler:
 
                 if self.state_tracker["DROWSY_TIME"] >= thresholds["WAIT_TIME"]:
                     self.state_tracker["play_alarm"] = True
-                    # plot_text(info_frame, "WAKE UP! WAKE UP", ALM_txt_pos, self.state_tracker["COLOR"])
 
             else:
 
@@ -177,8 +174,7 @@ class BlinkingHandler:
 
             EAR_txt = f"EAR: {round(EAR, 2)}"
             DROWSY_TIME_txt = f"DROWSY: {round(self.state_tracker['DROWSY_TIME'], 3)} Secs"
-            # plot_text(info_frame, EAR_txt + ', blink_time: ' + str(round(self.state_tracker["blink_time"])), self.EAR_txt_pos, self.state_tracker["COLOR"])
-            # plot_text(info_frame, DROWSY_TIME_txt, DROWSY_TIME_txt_pos, self.state_tracker["COLOR"])
+
 
         else:
             self.state_tracker["start_time"] = time.perf_counter()
