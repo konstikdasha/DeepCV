@@ -8,7 +8,7 @@ import influxdb_client
 
 
 class GUI:
-    token = "l4Ow2LAPv_8XX2uC4ay30O6rv6gnwf-YWbz3PI6s0g0CQnmhYEU3iov_6KspTaFmbx5R9wdM91ulnch4Xh_adA=="
+    token = ""
     org = "RSU of Oil and Gas"
     url = "http://localhost:8086"
     bucket = "status_controller_bucket"
