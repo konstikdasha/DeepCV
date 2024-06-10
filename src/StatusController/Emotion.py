@@ -76,8 +76,6 @@ class EmotionDetection:
             self.state_tracker["start_time"] = time.perf_counter()
             self.state_tracker["EMO_TIME"] = 0.0
 
-        print(result)
-        print(self.previous_text)
 
         if self.first:
             self.first = False
