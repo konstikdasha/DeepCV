@@ -16,10 +16,7 @@ class EmotionDetection:
                                     "EMO_TIME": 0,
                                  }
 
-            self.face_detector = cv2.dnn.readNetFromCaffe(r'C:\Users\Azat\source\repos\DeepCV\src\StatusController\resources\deploy.prototxt.txt',
-                                                           r'C:\Users\Azat\source\repos\DeepCV\src\StatusController\resources\res10_300x300_ssd_iter_140000.caffemodel')
-            # self.face_detector = cv2.dnn.readNetFromCaffe(r'/home/vitamin20021312/deep_cv/DeepCV/src/StatusController/resources/deploy.prototxt.txt',
-            #                                              r'/home/vitamin20021312/deep_cv/DeepCV/src/StatusController/resources/res10_300x300_ssd_iter_140000.caffemodel')
+            self.face_detector = cv2.FaceDetectorYN.create("face_detection_yunet_2022mar.onnx", "", (320, 320))
 
             # Load model directly
             self.processor = AutoImageProcessor.from_pretrained("adhityamw11/facial_emotions_image_detection_rafdb_microsoft_vit")
@@ -38,10 +35,12 @@ class EmotionDetection:
                           "confidence": 0.7,
                           }
 
-        blob = cv2.dnn.blobFromImage(cv2.resize(orig_image, (300, 300)), 1.0, (300, 300), (104.0, 177.0, 123.0))
+        img_W = int(img.shape[1])
+        img_H = int(img.shape[0])
+        # Set input size
+        detector.setInputSize((img_W, img_H))
 
-        self.face_detector.setInput(blob)
-        detections = self.face_detector.forward()
+        detections = detector.detect(img)
 
         faces = list()
 
